@@ -24,7 +24,6 @@ pipeline{
                 echo "Building the application"
                 echo " Application version is ${NEW_VERSION}"
                 sh "mvn install"
-
             }
         }
         stage('Test'){
@@ -42,7 +41,7 @@ pipeline{
                 echo "Deploying the application" 
                 echo "Deploying version ${params.VERSION}"
                 withCredentials([
-                    usernamePassword(credentials:'server-credentials', usernameVariable: USER , passwordVariable: PWD)
+                    usernamePassword(credentials:'server-credentials', usernameVariable: USERNAME , passwordVariable: PASSWORD)
                 ]){ 
                     sh "${USER} ${PWD}"
                 }
