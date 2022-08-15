@@ -40,11 +40,11 @@ pipeline{
             steps{
                 echo "Deploying the application" 
                 echo "Deploying version ${params.VERSION}"
-                withCredentials([
-                    usernamePassword(credentials:'server-credentials', usernameVariable: USERNAME , passwordVariable: PASSWORD)
-                ]){ 
-                    sh "${USER} ${PWD}"
-                }
+                // withCredentials([
+                //     usernamePassword(credentials:'server-credentials', usernameVariable: USERNAME , passwordVariable: PASSWORD)
+                // ]){ 
+                //     sh "${USER} ${PWD}"
+                // }
             }
         }
     }
