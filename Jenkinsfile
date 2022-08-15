@@ -6,7 +6,7 @@ pipeline{
         // SERVER_CREDENTIALS=credentials('server-credentials')
     }
     tools{
-        maven 'Maven'
+        maven 'maven-3.6'
     }
     parameters{
         choice(name: 'VERSION', choices: ['1.1.0', '1.2.0', '1.3.0'], description: '')
