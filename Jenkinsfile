@@ -15,11 +15,11 @@ pipeline{
 
     stages{
         stage('Build'){
-            when{
-                expression{
-                    // BRANCH_NAME=='jenkins-jobs'
-                }
-            }
+            // when{
+            //     expression{
+            //         BRANCH_NAME=='jenkins-jobs'
+            //     }
+            // }
             steps{
                 echo "Building the application"
                 echo " Application version is ${NEW_VERSION}"
