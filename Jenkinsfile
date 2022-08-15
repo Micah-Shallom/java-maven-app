@@ -1,50 +1,44 @@
+def gv
+
 pipeline{
     agent any
-
-    environment{
-        NEW_VERSION='1.3.0'
-        // SERVER_CREDENTIALS=credentials('server-credentials')
-    }
-    tools{
-        maven 'maven-3.6'
-    }
     parameters{
         choice(name: 'VERSION', choices: ['1.1.0', '1.2.0', '1.3.0'], description: '')
         booleanParam(name: 'executeTests', defaultValue: true, description: '')
     }
 
     stages{
-        stage('Build'){
-            // when{
-            //     expression{
-            //         BRANCH_NAME=='jenkins-jobs'
-            //     }
-            // }
+        stage("init"){
             steps{
-                echo "Building the application"
-                echo " Application version is ${NEW_VERSION}"
-                sh "mvn install"
+                script{
+                    gv = load "script.groovy"
+                }
             }
         }
-        stage('Test'){
+        stage('test'){
             when{
                 expression{
-                    params.executeTests 
+                    params.executeTests
                 }
             }
             steps{
-                echo "Testing the application"
+                script{
+                    gv.testApp()
+                }
             }
         }
-        stage('Deploying'){
+        stage('build'){
             steps{
-                echo "Deploying the application" 
-                echo "Deploying version ${params.VERSION}"
-                // withCredentials([
-                //     usernamePassword(credentials:'server-credentials', usernameVariable: USERNAME , passwordVariable: PASSWORD)
-                // ]){ 
-                //     sh "${USER} ${PWD}"
-                // }
+                script{
+                    gv.buildApp()
+                }
+            }
+        }
+        stage('deploy'){
+            steps{
+                script{
+                    gv.deployApp()
+                }
             }
         }
     }
