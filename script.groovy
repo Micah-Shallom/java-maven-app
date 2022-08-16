@@ -9,8 +9,8 @@ def buildImage(){
     withCredentials([
         usernamePassword(
             credentials:'dockerhub-credentials',
-            usernameVariable: USER
-            passwordVariable: PASSWD
+            usernameVariable: "USER"
+            passwordVariable: "PASSWD"
         )
     ]) {
         sh "docker build -t mshallom/java-app:jma-2.0 ."
