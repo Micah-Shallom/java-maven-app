@@ -8,7 +8,7 @@ def buildImage(){
     echo "Building the docker image from the dockerfile"
     withCredentials([
         usernamePassword(
-            credentials:'dockerhub-credentials',
+            credentialsId:'dockerhub-credentials',
             usernameVariable: "USER"
             passwordVariable: "PASSWD"
         )
@@ -22,3 +22,5 @@ def buildImage(){
 def deployApp(){
     echo "Deploying the application"
 }
+
+return this
