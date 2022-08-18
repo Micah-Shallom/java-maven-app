@@ -1,4 +1,4 @@
-@Library("Jenkins-Shared-Library")
+@Library("Jenkins-Shared-Library") //specify the jenkins-shared-library on jenkins server; provide path to the repo
 def gv
 
 pipeline{
@@ -26,7 +26,7 @@ pipeline{
         stage('buildImage'){
             steps{
                 script{
-                    buildImage()
+                    buildImage 'mshallom/test-repo:jma-2.0'
                 }
             }
         }
