@@ -1,4 +1,4 @@
-@Library("Jenkins-Shared-Library") //specify the jenkins-shared-library on jenkins server; provide path to the repo
+@Library("Jenkins-Shared-Library") 
 def gv
 
 pipeline{
