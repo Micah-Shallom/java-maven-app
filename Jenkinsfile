@@ -43,7 +43,7 @@ pipeline{
         }
         stage('commiting version update to github'){
             steps{
-                scripts{
+                script{
                     gv.commitVersion()
                 }
             }
