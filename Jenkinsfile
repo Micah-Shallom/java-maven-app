@@ -41,5 +41,12 @@ pipeline{
                 }
             }
         }
+        stage('commiting version update to github'){
+            steps{
+                scripts{
+                    gv.commitVersion()
+                }
+            }
+        }
     }
 }

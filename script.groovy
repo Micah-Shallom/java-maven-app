@@ -12,9 +12,9 @@ def buildJar() {
 
 def buildImage() {
     echo "building the docker image..."
-    withCredentials([usernamePassword(credentialsId: 'dockerhub-credentials', passwordVariable: 'PASS', usernameVariable: 'USER')]) {
+    withCredentials([usernamePassword(credentialsId: 'dockerhub-credentials', passwordVariable: 'PASSWD', usernameVariable: 'USER')]) {
         sh "docker build -t mshallom/java-app:${IMAGE_NAME} ."
-        sh "echo $PASS | docker login -u $USER --password-stdin"
+        sh "echo $PASSWD | docker login -u $USER --password-stdin"
         sh "docker push mshallom/java-app:${IMAGE_NAME}"
     }
 } 
@@ -22,5 +22,28 @@ def buildImage() {
 def deployApp() {
     echo 'deploying the application...'
 } 
+
+def commitVersion(){
+    echo "Commiting new software version to github"
+    withCredentials([
+        usernamePassword(
+            credentialsId:'github-credentials',
+            passwordVariable: 'PASSWD',
+            usernameVariable: 'USER',
+        ){
+            sh "git config --global user.email 'jenkins@example.com'"
+            sh "git config --global user.name 'jenkins'"
+
+            sh 'git status'
+            sh 'git branch'
+            sh 'git config --list'
+
+            sh "git remote set-url origin https://${USER}:${PASSWD}@https://github.com/Micah-Shallom/java-maven-app.git"
+            sh "git add ."
+            sh "git commit -m 'ci: version bump'"
+            sh "git push origin HEAD:jenkins-versioning"
+        }
+    ])
+}
 
 return this
