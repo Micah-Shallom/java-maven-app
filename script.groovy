@@ -26,7 +26,7 @@ def deployApp() {
 def commitVersion(){
     echo "Commiting new software version to github"
     // withCredentials([usernamePassword(credentialsId:'github-credentials', passwordVariable: 'PASSWD', usernameVariable: 'USER')]){
-        sshagent(credentials: ['jenkins-server-key']) {
+        sshagent(credentials: ['mshallom']) {
             sh "git config --global user.email 'jenkins@example.com'"
             sh "git config --global user.name 'jenkins'"
 
