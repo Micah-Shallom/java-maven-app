@@ -31,15 +31,14 @@ def commitVersion(){
             passwordVariable: 'PASSWD',
             usernameVariable: 'USER',
         ){
-            sh "git config --global user.email 'jenkins@example.com'"
-            sh "git config --global user.name 'jenkins'"
+            sh "git config --global user.email 'micahshallom@gmail.com'"
+            sh "git config --global user.name 'Shallom Micah'"
 
             sh 'git status'
             sh 'git branch'
             sh 'git config --list'
 
-            // sh "git remote set-url origin https://${USER}:${PASSWD}@github.com/Micah-Shallom/java-maven-app.git"
-            sh "git remote set-url origin https://github.com/Micah-Shallom/java-maven-app.git.git"
+            sh 'git remote set-url origin https://${USER}:${PASSWD}@github.com/Micah-Shallom/java-maven-app.git'
             sh "git add ."
             sh "git commit -m 'ci: version bump'"
             sh "git push origin HEAD:jenkins-versioning"
