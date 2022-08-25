@@ -37,7 +37,7 @@ def commitVersion(){
             sh 'git remote set-url origin git@github.com:Micah-Shallom/java-maven-app.git'
             sh "git add ."
             sh "git commit -m 'ci: version bump'"
-            sh "git push origin HEAD:jenkins-versioning"
+            sh "git push origin jenkins-versioning"
         }
     // withCredentials([gitUsernamePassword(credentialsId: 'github-credentials', gitToolName: 'git-tool')]){
     //         sh "git config --global user.email 'micahshallom@gmail.com'"
