@@ -27,6 +27,8 @@ pipeline{
             steps{
                 script{
                     buildImage 'mshallom/test-repo:jma-2.0'
+                    dockerLogin()
+                    dockerPush 'mshallom/test-repo:jma-2.0'
                 }
             }
         }
