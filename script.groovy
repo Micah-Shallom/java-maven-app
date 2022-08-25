@@ -12,9 +12,9 @@ def buildJar() {
 
 def buildImage() {
     echo "building the docker image..."
-    withCredentials([usernamePassword(credentialsId: 'dockerhub-credentials', passwordVariable: 'PASSWD', usernameVariable: 'USER')]) {
+    withCredentials([usernamePassword(credentialsId: 'dockerhub-credentials', passwordVariable: 'PASS', usernameVariable: 'USER')]) {
         sh "docker build -t mshallom/java-app:${IMAGE_NAME} ."
-        sh "echo $PASSWD | docker login -u $USER --password-stdin"
+        sh "echo $PASS | docker login -u $USER --password-stdin"
         sh "docker push mshallom/java-app:${IMAGE_NAME}"
     }
 } 
@@ -38,7 +38,7 @@ def commitVersion(){
             sh 'git branch'
             sh 'git config --list'
 
-            sh 'git remote set-url origin https://${USER}:${PASSWD}@github.com/Micah-Shallom/java-maven-app.git'
+            // sh 'git remote set-url origin https://${USER}:${PASSWD}@github.com/Micah-Shallom/java-maven-app.git'
             sh "git add ."
             sh "git commit -m 'ci: version bump'"
             sh "git push origin HEAD:jenkins-versioning"
