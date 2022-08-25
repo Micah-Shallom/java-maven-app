@@ -26,15 +26,14 @@ def deployApp() {
 def commitVersion(){
     echo "Commiting new software version to github"
     // withCredentials([usernamePassword(credentialsId:'github-credentials', passwordVariable: 'PASSWD', usernameVariable: 'USER')]){
-        sshagent(credentials: ['Github_SSH_Auth']) {
-            sh "git config --global user.email 'micahshallom@gmail.com'"
-            sh "git config --global user.name 'Shallom Micah'"
+        sshagent(credentials: ['jenkins-server-key']) {
+            sh "git config --global user.email 'jenkins@example.com'"
+            sh "git config --global user.name 'jenkins'"
 
             sh 'git status'
             sh 'git branch'
             sh 'git config --list'
 
-            // sh 'git remote set-url origin https://${USER}:${PASSWD}@github.com/Micah-Shallom/java-maven-app.git'
             sh 'git remote set-url origin git@github.com:Micah-Shallom/java-maven-app.git'
             sh "git add ."
             sh "git commit -m 'ci: version bump'"
