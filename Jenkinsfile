@@ -14,7 +14,7 @@ pipeline{
         maven 'Maven'
     }
     environment{
-        IMAGE_NAME = "mshallom/demo-app:1.0"
+        IMAGE_NAME = "mshallom/maven-app:1.0"
     }
 
     stages{
