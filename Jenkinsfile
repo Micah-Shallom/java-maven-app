@@ -1,4 +1,10 @@
-@Library("Jenkins-Shared-Library") 
+library identifier: 'jenkins-shared-library@master', retriever: modernSCM(
+    [$class: 'GitSCMSource',
+     remote: 'https://github.com/Micah-Shallom/Jenkins-shared-library.git',
+     credentialsId: 'github-credentials'
+    ]
+)
+
 def gv
 
 pipeline{
@@ -7,9 +13,12 @@ pipeline{
     tools{
         maven 'Maven'
     }
+    environment{
+        IMAGE_NAME = "mshallom/demo-app:1.0"
+    }
 
     stages{
-        stage("init"){
+        stage('init'){
             steps{
                 script{
                     gv = load "script.groovy"
@@ -26,16 +35,16 @@ pipeline{
         stage('buildImage'){
             steps{
                 script{
-                    buildImage 'mshallom/test-repo:jma-2.0'
+                    buildImage(env.IMAGE_NAME)
                     dockerLogin()
-                    dockerPush 'mshallom/test-repo:jma-2.0'
+                    dockerPush(env.IMAGE_NAME)
                 }
             }
         }
-        stage('deployApp'){
+        stage('deployToServer'){
             steps{
                 script{
-                    gv.deployApp()
+                   gv.deployImage()
                 }
             }
         }
