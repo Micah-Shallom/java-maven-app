@@ -1,13 +1,15 @@
-FROM openjdk:8-jre-alpine
+FROM node:10 AS ui-build
+WORKDIR /usr/src/app
+COPY my-app/ ./my-app/
+RUN cd my-app && npm install && npm run build
 
-EXPOSE 8080
+FROM node:10 AS server-build
+WORKDIR /root/
+COPY --from=ui-build /usr/src/app/my-app/build ./my-app/build
+COPY api/package*.json ./api/
+RUN cd api && npm install
+COPY api/server.js ./api/
 
-RUN mkdir -p /usr/app 
+EXPOSE 80
 
-WORKDIR /usr/app
-
-COPY ./target/java-maven-app-*.jar /usr/app
-
-CMD java -jar java-maven-app-*.jar
-
-# ENTRYPOINT ["java", "-jar", "java-maven-app-1.1.0-SNAPSHOT.jar"]
+CMD ["node", "./api/server.js"]

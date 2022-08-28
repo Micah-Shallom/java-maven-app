@@ -1,2 +1,0 @@
-# java-maven-app
-build
