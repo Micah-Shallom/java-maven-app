@@ -54,7 +54,7 @@ pipeline{
         stage("Commit app version update to github"){
             steps{
                 script{
-                    gv.commitVerion()
+                    gv.commitVersion()
                 }
             }
         }
