@@ -13,15 +13,18 @@ pipeline{
     tools{
         maven 'Maven'
     }
-    environment{
-        IMAGE_NAME = "mshallom/maven-app:1.0"
-    }
-
     stages{
         stage('init'){
             steps{
                 script{
                     gv = load "script.groovy"
+                }
+            }
+        }
+        stage("Increment App Version"){
+            steps{
+                script{
+                    gv.incrementApp()
                 }
             }
         }
@@ -44,7 +47,14 @@ pipeline{
         stage('deployToServer'){
             steps{
                 script{
-                   gv.deployImage(env.IMAGE_NAME)
+                    gv.deployImage(env.IMAGE_NAME)
+                }
+            }
+        }
+        stage("Commit app version update to github"){
+            steps{
+                script{
+                    gv.commitVerion()
                 }
             }
         }
