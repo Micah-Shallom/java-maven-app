@@ -2,7 +2,7 @@
 
 In this project, I setup a CICD pipeline using Jenkins.
 
-Abstractions of the code can be found in the Jenkins Shared Repository as the concept of the Jenkins Shared Library was used ![JSL_Repo](https://github.com/Micah-Shallom/Jenkins-shared-library)
+Abstractions of the code can be found in the Jenkins Shared Repository as the concept of the Jenkins Shared Library was used [JSL_Repo](https://github.com/Micah-Shallom/Jenkins-shared-library)
 
 Major Build Jobs in this pipeline includes:
 
